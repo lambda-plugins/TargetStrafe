@@ -36,8 +36,8 @@ object TargetStrafe : PluginModule(
     private val needsAura by setting("NeedsAura", true)
     private val antiStuck by setting("AntiStuck", true)
 
-    private val renderCircle by setting("RenderCircle", true, { false })
-    private val renderThickness by setting("RenderThickness", 2f, 0.5f..8f, 0.5f, { renderCircle })
+//    private val renderCircle by setting("RenderCircle", true, { false })
+//    private val renderThickness by setting("RenderThickness", 2f, 0.5f..8f, 0.5f, { renderCircle })
 //    private val distanceColor by setting("DistanceColor", ColorHolder(255, 240, 246), false)
 //    private val playerDistanceColor by setting("PlayerDistanceColor", ColorHolder(214, 0, 0), false)
 
@@ -125,28 +125,28 @@ object TargetStrafe : PluginModule(
         direction = -direction
     }
 
-    private fun drawCircle(center: Vec3d, radius: Double, color: ColorHolder, precision: Int) {
-        val linesToDraw = ArrayList<Pair<Vec3d, Vec3d>>()
-        val magic = precision / 360
-        var lastPos = center.add(0.0, 0.0, radius)
-
-        for (i in 0..precision) {
-            val yaw = i * magic
-            val x = radius * cos(Math.toRadians((yaw + 90.0f).toDouble()))
-            val z = radius * sin(Math.toRadians((yaw + 90.0f).toDouble()))
-
-            val newPos = center.add(x, 0.0, z)
-            linesToDraw.add(Pair(lastPos, newPos))
-            lastPos = newPos
-        }
-
-        val buffer = LambdaTessellator.buffer
-        GlStateManager.glLineWidth(renderThickness)
-        LambdaTessellator.begin(GL_LINE_STRIP)
-        linesToDraw.forEach { pair ->
-            buffer.pos(pair.first.x, center.y, pair.first.z).color(color.r, color.g, color.b, color.a).endVertex()
-            buffer.pos(pair.second.x, center.y, pair.second.z).color(color.r, color.g, color.b, color.a).endVertex()
-        }
-        LambdaTessellator.render()
-    }
+//    private fun drawCircle(center: Vec3d, radius: Double, color: ColorHolder, precision: Int) {
+//        val linesToDraw = ArrayList<Pair<Vec3d, Vec3d>>()
+//        val magic = precision / 360
+//        var lastPos = center.add(0.0, 0.0, radius)
+//
+//        for (i in 0..precision) {
+//            val yaw = i * magic
+//            val x = radius * cos(Math.toRadians((yaw + 90.0f).toDouble()))
+//            val z = radius * sin(Math.toRadians((yaw + 90.0f).toDouble()))
+//
+//            val newPos = center.add(x, 0.0, z)
+//            linesToDraw.add(Pair(lastPos, newPos))
+//            lastPos = newPos
+//        }
+//
+//        val buffer = LambdaTessellator.buffer
+//        GlStateManager.glLineWidth(renderThickness)
+//        LambdaTessellator.begin(GL_LINE_STRIP)
+//        linesToDraw.forEach { pair ->
+//            buffer.pos(pair.first.x, center.y, pair.first.z).color(color.r, color.g, color.b, color.a).endVertex()
+//            buffer.pos(pair.second.x, center.y, pair.second.z).color(color.r, color.g, color.b, color.a).endVertex()
+//        }
+//        LambdaTessellator.render()
+//    }
 }
